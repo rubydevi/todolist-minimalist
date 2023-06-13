@@ -22,8 +22,7 @@ const renderTodoList = () => {
     label.append(task.description);
 
     const dragRow = document.createElement('span');
-    dragRow.innerHTML = 
-    `
+    dragRow.innerHTML = `
     <i class="fa-solid fa-ellipsis-vertical"></i>
     `;
 
