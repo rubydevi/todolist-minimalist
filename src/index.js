@@ -1,9 +1,9 @@
 import './style.css';
 
 const tasks = [
-  { description: 'Task 1', completed: false, index: 1 },
-  { description: 'Task 2', completed: true, index: 2 },
-  { description: 'Task 3', completed: false, index: 3 },
+  { description: 'Go to the gym', completed: false, index: 1 },
+  { description: 'Download youtube videos', completed: true, index: 2 },
+  { description: 'Call Monica back', completed: false, index: 3 },
 ];
 
 const renderTodoList = () => {
