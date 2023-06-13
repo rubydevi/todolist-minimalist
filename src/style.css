@@ -119,3 +119,8 @@ button:hover {
   text-decoration: underline;
   color: #000;
 }
+
+input[type='checkbox'] {
+  width: 1.2rem;
+  height: 1.2rem;
+}
