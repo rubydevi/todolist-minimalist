@@ -1,7 +1,64 @@
-.hello {
-  color: red;
+body {
+  margin: 0;
 }
 
-body {
-  background-color: bisque;
+main {  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f6f6f6;
+  height: 100vh;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+#divToDoList {
+  width: 50%;
+  box-shadow: 4px 3px 6px rgb(0 0 0 / 8%);
+}
+
+.list-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3%;
+  border-bottom: 1px solid #0000001f;
+}
+
+.list-title h2 {
+  color: #5c5c5c;
+  font-weight: 400;
+}
+
+.list-title i {
+  color: #949494;
+}
+
+.list-input input {
+  width: 96%;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #0000001f;
+  padding: 5% 2%;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.incomplete {
+  color: #333;
 }
