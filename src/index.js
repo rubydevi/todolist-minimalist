@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import './style.css';
 
 const tasks = [
@@ -18,6 +17,6 @@ const renderTodoList = () => {
     listItem.classList.add(task.completed ? 'completed' : 'incomplete');
     todoList.appendChild(listItem);
   });
-}
+};
 
 window.addEventListener('DOMContentLoaded', renderTodoList);
