@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  font-family: 'circular', sans-serif;
 }
 
 main {
@@ -23,25 +24,43 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 3%;
+  padding: 3%;
   border-bottom: 1px solid #0000001f;
 }
 
 .list-title h2 {
   color: #5c5c5c;
-  font-weight: 400;
+  font-weight: 400;  
+  margin: 0;
+  font-size: 1em;
 }
 
 .list-title i {
   color: #949494;
 }
 
+.list-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #0000001f;
+  padding-right: 2%;
+}
+
 .list-input input {
   width: 96%;
   border: none;
   outline: none;
-  border-bottom: 1px solid #0000001f;
-  padding: 5% 2%;
+  padding: 3%;
+}
+
+.list-input input::placeholder {
+  font-style: italic;
+}
+
+.list-input i {
+  color: #c2c2c2;
+  padding-right: 1%;
 }
 
 ul {
@@ -50,8 +69,25 @@ ul {
 }
 
 li {
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3%;
+  border-bottom: 1px solid #0000001f;
+  list-style: none;
+}
+
+#todo-list label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8em;
+}
+
+#todo-list i {
+  color: #949494;
+  cursor: move;
 }
 
 .completed {
@@ -61,4 +97,26 @@ li {
 
 .incomplete {
   color: #333;
+}
+
+.list-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3%;
+  background-color: #f6f6f6;
+}
+
+button {
+  
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: #919191;
+  cursor: pointer;
+}
+
+button:hover {
+  text-decoration: underline;
+  color: #000;
 }
