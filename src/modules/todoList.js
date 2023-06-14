@@ -110,3 +110,15 @@ export const editTaskDescription = (index, newDescription) => {
     renderTodoList();
   }
 };
+
+export const saveTasksToLocalStorage = () => {
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+};
+
+export const loadTasksFromLocalStorage = () => {
+  const storedTasks = localStorage.getItem('tasks');
+  if (storedTasks) {
+    tasks = JSON.parse(storedTasks);
+    renderTodoList();
+  }
+};
