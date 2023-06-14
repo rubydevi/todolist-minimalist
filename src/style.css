@@ -11,6 +11,12 @@ main {
   height: 100vh;
 }
 
+input {
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
 .bg-white {
   background-color: white;
 }
@@ -49,8 +55,6 @@ main {
 
 .list-input input {
   width: 96%;
-  border: none;
-  outline: none;
   padding: 3%;
 }
 
@@ -87,6 +91,9 @@ li {
 
 #todo-list i {
   color: #949494;
+}
+
+.drag-row {
   cursor: move;
 }
 
