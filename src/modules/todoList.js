@@ -78,7 +78,8 @@ export const renderTodoList = () => {
       deleteButton.addEventListener('click', (event) => {
         event.stopPropagation(); // Prevent the event from bubbling up to the list item
         const index = parseInt(listItem.dataset.index, 10);
-        deleteTask(index);
+        tasks = tasks.filter((task) => task.index !== index);
+        renderTodoList();
         clickedListItem.remove();
       });
     });
@@ -92,14 +93,6 @@ export const addTask = (description) => {
     index: tasks.length + 1,
   };
   tasks.push(newTask);
-  renderTodoList();
-};
-
-const deleteTask = (index) => {
-  tasks = tasks.filter((task) => task.index !== index);
-  tasks.forEach((task, i) => {
-    task.index = i + 1;
-  });
   renderTodoList();
 };
 
@@ -122,3 +115,6 @@ export const loadTasksFromLocalStorage = () => {
     renderTodoList();
   }
 };
+
+// Call the `renderTodoList` function at the end of the code
+renderTodoList();
