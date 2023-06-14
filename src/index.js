@@ -1,36 +1,36 @@
 import './style.css';
+import {
+  renderTodoList, addTask, editTaskDescription, loadTasksFromLocalStorage, saveTasksToLocalStorage,
+} from './modules/todoList.js';
 
-const tasks = [
-  { description: 'Go to the gym', completed: false, index: 1 },
-  { description: 'Download youtube videos', completed: true, index: 2 },
-  { description: 'Call Monica back', completed: false, index: 3 },
-];
+window.addEventListener('DOMContentLoaded', loadTasksFromLocalStorage);
+window.addEventListener('beforeunload', saveTasksToLocalStorage);
 
-const renderTodoList = () => {
-  const todoList = document.getElementById('todo-list');
+const todoInput = document.querySelector('.list-input input');
+const todoList = document.getElementById('todoList');
 
-  tasks.sort((a, b) => a.index - b.index);
+// add tasks EventListener
+todoInput.addEventListener('keydown', (event) => {
+  if (event.keyCode === 13) {
+    const description = todoInput.value.trim();
+    if (description !== '') {
+      addTask(description);
+      todoInput.value = ''; // Clear the input field
+    }
+  }
+});
 
-  tasks.forEach((task) => {
-    const listItem = document.createElement('li');
-    const listCheck = document.createElement('input');
-    listCheck.setAttribute('type', 'checkbox');
-    listCheck.checked = task.completed;
+// edit eventlistener
+todoList.addEventListener('keydown', (event) => {
+  if (event.target.classList.contains('edit-input') && event.keyCode === 13) {
+    const listItem = event.target.parentNode.parentNode;
+    const index = parseInt(listItem.dataset.index, 10);
+    const newDescription = event.target.value.trim();
+    if (newDescription !== '') {
+      editTaskDescription(index, newDescription);
+    }
+  }
+});
 
-    const label = document.createElement('label');
-    label.appendChild(listCheck);
-    label.append(task.description);
-
-    const dragRow = document.createElement('span');
-    dragRow.innerHTML = `
-    <i class="fa-solid fa-ellipsis-vertical"></i>
-    `;
-
-    listItem.appendChild(label);
-    listItem.appendChild(dragRow);
-    listItem.classList.add(task.completed ? 'completed' : 'incomplete');
-    todoList.appendChild(listItem);
-  });
-};
-
-window.addEventListener('DOMContentLoaded', renderTodoList);
+// Call the renderTodoList function to initialize the list
+renderTodoList();

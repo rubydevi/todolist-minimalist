@@ -11,6 +11,12 @@ main {
   height: 100vh;
 }
 
+input {
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
 .bg-white {
   background-color: white;
 }
@@ -49,8 +55,6 @@ main {
 
 .list-input input {
   width: 96%;
-  border: none;
-  outline: none;
   padding: 3%;
 }
 
@@ -77,7 +81,7 @@ li {
   list-style: none;
 }
 
-#todo-list label {
+#todoList label {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -85,8 +89,16 @@ li {
   font-size: 0.8em;
 }
 
+input[type='checkbox'] {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
 #todo-list i {
   color: #949494;
+}
+
+.drag-row {
   cursor: move;
 }
 
@@ -118,9 +130,4 @@ button {
 button:hover {
   text-decoration: underline;
   color: #000;
-}
-
-input[type='checkbox'] {
-  width: 1.2rem;
-  height: 1.2rem;
 }
