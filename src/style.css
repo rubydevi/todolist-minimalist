@@ -81,12 +81,17 @@ li {
   list-style: none;
 }
 
-#todo-list label {
+#todoList label {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 5px;
   font-size: 0.8em;
+}
+
+input[type='checkbox'] {
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
 #todo-list i {
@@ -125,9 +130,4 @@ button {
 button:hover {
   text-decoration: underline;
   color: #000;
-}
-
-input[type='checkbox'] {
-  width: 1.2rem;
-  height: 1.2rem;
 }
