@@ -19,3 +19,18 @@ todoInput.addEventListener('keydown', (event) => {
     }
   }
 });
+
+// edit eventlistener
+todoList.addEventListener('keydown', (event) => {
+  if (event.target.classList.contains('edit-input') && event.keyCode === 13) {
+    const listItem = event.target.parentNode.parentNode;
+    const index = parseInt(listItem.dataset.index, 10);
+    const newDescription = event.target.value.trim();
+    if (newDescription !== '') {
+      editTaskDescription(index, newDescription);
+    }
+  }
+});
+
+// Call the renderTodoList function to initialize the list
+renderTodoList();
