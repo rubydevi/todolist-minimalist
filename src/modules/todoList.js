@@ -84,3 +84,29 @@ export const renderTodoList = () => {
     });
   });
 };
+
+export const addTask = (description) => {
+  const newTask = {
+    description,
+    completed: false,
+    index: tasks.length + 1,
+  };
+  tasks.push(newTask);
+  renderTodoList();
+};
+
+const deleteTask = (index) => {
+  tasks = tasks.filter((task) => task.index !== index);
+  tasks.forEach((task, i) => {
+    task.index = i + 1;
+  });
+  renderTodoList();
+};
+
+export const editTaskDescription = (index, newDescription) => {
+  const task = tasks.find((task) => task.index === index);
+  if (task) {
+    task.description = newDescription;
+    renderTodoList();
+  }
+};
