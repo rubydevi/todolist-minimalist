@@ -1,5 +1,9 @@
 let tasks = [];
 
+export const saveTasksToLocalStorage = () => {
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+};
+
 export const renderTodoList = () => {
   const todoList = document.getElementById('todoList');
   todoList.innerHTML = ''; // Clear the existing list
@@ -75,11 +79,20 @@ export const renderTodoList = () => {
       deleteButton.style.display = 'inline-block';
       dragRow.style.display = 'none';
 
+      // delete function
+      const deleteTask = (index) => {
+        tasks = tasks.filter((task) => task.index !== index);
+        tasks.forEach((task, i) => {
+          task.index = i + 1;
+        });
+        saveTasksToLocalStorage();
+        renderTodoList();
+      };
+
       deleteButton.addEventListener('click', (event) => {
         event.stopPropagation(); // Prevent the event from bubbling up to the list item
-        const index = parseInt(listItem.dataset.index, 10);
-        tasks = tasks.filter((task) => task.index !== index);
-        renderTodoList();
+        const index = parseInt(clickedListItem.dataset.index, 10);
+        deleteTask(index);
         clickedListItem.remove();
       });
     });
@@ -93,6 +106,9 @@ export const addTask = (description) => {
     index: tasks.length + 1,
   };
   tasks.push(newTask);
+
+  // Save tasks to local storage
+  saveTasksToLocalStorage();
   renderTodoList();
 };
 
@@ -100,20 +116,19 @@ export const editTaskDescription = (index, newDescription) => {
   const task = tasks.find((task) => task.index === index);
   if (task) {
     task.description = newDescription;
+
+    // Save tasks to local storage
+    saveTasksToLocalStorage();
     renderTodoList();
   }
-};
-
-export const saveTasksToLocalStorage = () => {
-  localStorage.setItem('tasks', JSON.stringify(tasks));
 };
 
 export const loadTasksFromLocalStorage = () => {
   const storedTasks = localStorage.getItem('tasks');
   if (storedTasks) {
     tasks = JSON.parse(storedTasks);
-    renderTodoList();
   }
+  renderTodoList();
 };
 
 // Call the `renderTodoList` function at the end of the code
