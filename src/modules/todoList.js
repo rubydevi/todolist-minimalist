@@ -1,4 +1,4 @@
-export let tasks = [];
+let tasks = [];
 
 export const saveTasksToLocalStorage = () => {
   localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -129,6 +129,12 @@ export const loadTasksFromLocalStorage = () => {
     tasks = JSON.parse(storedTasks);
   }
   renderTodoList();
+};
+
+export const getTasks = () => tasks; // Getter function
+
+export const setTasks = (newTasks) => { // Setter function
+  tasks = newTasks;
 };
 
 // Call the `renderTodoList` function at the end of the code
