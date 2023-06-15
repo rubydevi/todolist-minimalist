@@ -4,23 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wbpack Exercise</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <script defer src="runtime.js"></script><script defer src="main.js"></script></head>
 <body>
-    <div id="myDIV" class="header">
-        <h2>My To Do List</h2>
-        <input type="text" id="myInput" placeholder="Title...">
-        <span onclick="newElement()" class="addBtn">Add</span>
-    </div>
-    
-    <ul id="myUL">
-        <li>Hit the gym</li>
-        <li class="checked">Pay bills</li>
-        <li>Meet George</li>
-        <li>Buy eggs</li>
-        <li>Read a book</li>
-        <li>Organize office</li>
-    </ul>
-
-    <script src="index.js"></script>
+    <main>
+        <div id="divToDoList" class="bg-white">
+            <div class="list-title">
+                <h2>Today's To Do</h2>
+                <i class="fa-solid fa-rotate"></i>
+            </div>
+            <div class="list-input">
+                <input type="text" placeholder="Add to your list...">
+                <i class="fas fa-level-down-alt fa-rotate-90"></i>
+            </div>
+            <div id="todoList"></div>
+            <div class="list-footer">
+                <button>Clear all completed</button>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
