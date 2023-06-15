@@ -1,8 +1,8 @@
 import './style.css';
 import {
-  renderTodoList, addTask, editTaskDescription, loadTasksFromLocalStorage, saveTasksToLocalStorage, updateStatus, clearCompleted
+  renderTodoList, addTask, editTaskDescription, loadTasksFromLocalStorage, saveTasksToLocalStorage,
 } from './modules/todoList.js';
-// import { updateStatus, clearCompleted } from './modules/statusUpdates.js';
+import { updateStatus, clearCompleted } from './modules/statusUpdates.js';
 
 window.addEventListener('DOMContentLoaded', loadTasksFromLocalStorage);
 window.addEventListener('beforeunload', saveTasksToLocalStorage);
