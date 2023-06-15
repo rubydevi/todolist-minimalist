@@ -131,5 +131,11 @@ export const loadTasksFromLocalStorage = () => {
   renderTodoList();
 };
 
+export const getTasks = () => tasks; // Getter function
+
+export const setTasks = (newTasks) => { // Setter function
+  tasks = newTasks;
+};
+
 // Call the `renderTodoList` function at the end of the code
 renderTodoList();
