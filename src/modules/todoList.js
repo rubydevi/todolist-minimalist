@@ -128,12 +128,21 @@ export const updateStatus = (index, completed) => {
   const task = tasks.find((task) => task.index === index);
   if (task) {
     task.completed = completed;
+    // Save tasks to local storage
+    saveTasksToLocalStorage();
     renderTodoList();
   }
 };
 
 export const clearCompleted = () => {
-  tasks = tasks.filter((task) => !task.completed);
+  const filteredTasks = tasks.filter((task) => !task.completed);
+
+  tasks = filteredTasks.map((task, index) => ({
+    ...task,
+    index: index + 1,
+  }));
+  // Save tasks to local storage
+  saveTasksToLocalStorage();
   renderTodoList();
 };
 
