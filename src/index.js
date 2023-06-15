@@ -9,6 +9,7 @@ window.addEventListener('beforeunload', saveTasksToLocalStorage);
 
 const todoInput = document.querySelector('.list-input input');
 const todoList = document.getElementById('todoList');
+const clearButton = document.querySelector('.list-footer button');
 
 // add tasks EventListener
 todoInput.addEventListener('keydown', (event) => {
@@ -32,6 +33,19 @@ todoList.addEventListener('keydown', (event) => {
     }
   }
 });
+
+// checkbox change event listener
+todoList.addEventListener('change', (event) => {
+  if (event.target.type === 'checkbox') {
+    const listItem = event.target.parentNode.parentNode;
+    const index = parseInt(listItem.dataset.index, 10);
+    const completed = event.target.checked;
+    updateStatus(index, completed);
+  }
+});
+
+// "Clear all completed" button event listener
+clearButton.addEventListener('click', clearCompleted);
 
 // Call the renderTodoList function to initialize the list
 renderTodoList();
