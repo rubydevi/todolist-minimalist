@@ -1,4 +1,4 @@
-let tasks = [];
+export let tasks = [];
 
 export const saveTasksToLocalStorage = () => {
   localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -121,29 +121,6 @@ export const editTaskDescription = (index, newDescription) => {
     saveTasksToLocalStorage();
     renderTodoList();
   }
-};
-
-// INTERACTIVE LIST
-export const updateStatus = (index, completed) => {
-  const task = tasks.find((task) => task.index === index);
-  if (task) {
-    task.completed = completed;
-    // Save tasks to local storage
-    saveTasksToLocalStorage();
-    renderTodoList();
-  }
-};
-
-export const clearCompleted = () => {
-  const filteredTasks = tasks.filter((task) => !task.completed);
-
-  tasks = filteredTasks.map((task, index) => ({
-    ...task,
-    index: index + 1,
-  }));
-  // Save tasks to local storage
-  saveTasksToLocalStorage();
-  renderTodoList();
 };
 
 export const loadTasksFromLocalStorage = () => {
