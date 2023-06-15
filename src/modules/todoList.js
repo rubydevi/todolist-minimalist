@@ -123,6 +123,20 @@ export const editTaskDescription = (index, newDescription) => {
   }
 };
 
+// INTERACTIVE LIST
+export const updateStatus = (index, completed) => {
+  const task = tasks.find((task) => task.index === index);
+  if (task) {
+    task.completed = completed;
+    renderTodoList();
+  }
+};
+
+export const clearCompleted = () => {
+  tasks = tasks.filter((task) => !task.completed);
+  renderTodoList();
+};
+
 export const loadTasksFromLocalStorage = () => {
   const storedTasks = localStorage.getItem('tasks');
   if (storedTasks) {
