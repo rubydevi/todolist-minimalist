@@ -1,6 +1,6 @@
 import {
   setTasks,
-  getTasks
+  getTasks,
 } from '../modules/todoList.js';
 
 import { updateStatus } from '../modules/statusUpdates.js';
