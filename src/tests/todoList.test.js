@@ -1,6 +1,6 @@
 import localStorageMock from '../modules/__mocks__/localStorageMock.js';
 import {
-  addTask, deleteTask, setTasks, getTasks,
+  addTask, deleteTask, setTasks, getTasks, editTaskDescription
 } from '../modules/todoList.js';
 
 const todoList = document.createElement('ul');
