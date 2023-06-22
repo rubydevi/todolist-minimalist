@@ -6,7 +6,9 @@ export const saveTasksToLocalStorage = () => {
 
 export const renderTodoList = () => {
   const todoList = document.getElementById('todoList');
-  todoList.innerHTML = ''; // Clear the existing list
+  if (todoList) {
+    todoList.innerHTML = ''; // Clear the existing list
+  }
 
   tasks.sort((a, b) => a.index - b.index);
 
@@ -108,6 +110,15 @@ export const addTask = (description) => {
   tasks.push(newTask);
 
   // Save tasks to local storage
+  saveTasksToLocalStorage();
+  renderTodoList();
+};
+
+export const deleteTask = (index) => {
+  tasks = tasks.filter((task) => task.index !== index);
+  tasks.forEach((task, i) => {
+    task.index = i + 1;
+  });
   saveTasksToLocalStorage();
   renderTodoList();
 };
