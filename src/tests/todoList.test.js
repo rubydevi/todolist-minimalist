@@ -1,6 +1,7 @@
-import localStorageMock from '../modules/__mocks__/localStorageMock';
-import { addTask, deleteTask, setTasks, getTasks } from '../modules/todoList';
-
+import localStorageMock from '../modules/__mocks__/localStorageMock.js';
+import {
+  addTask, deleteTask, setTasks, getTasks,
+} from '../modules/todoList.js';
 
 const todoList = document.createElement('ul');
 todoList.id = 'todoList';
@@ -28,7 +29,7 @@ describe('deleteTask', () => {
     const mockTasks = [
       { index: 1, description: 'go to gym', completed: false },
       { index: 2, description: 'join meeting', completed: true },
-      { index: 3, description: 'play video games', completed: false }
+      { index: 3, description: 'play video games', completed: false },
     ];
     setTasks(mockTasks);
   });
@@ -46,17 +47,3 @@ describe('deleteTask', () => {
     // Additional assertions if needed
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
