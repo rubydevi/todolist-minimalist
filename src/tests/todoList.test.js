@@ -70,4 +70,12 @@ describe('editTaskDescription', () => {
     const savedTasks = JSON.parse(localStorage.getItem('tasks'));
     expect(savedTasks).toEqual(updatedTasks);
   });
+
+  it('should not edit the description when task index is not found', () => {
+    // Call editTaskDescription() with non-existing task index
+    editTaskDescription(4, 'updated description');
+    // Assert that the tasks and localStorage are not updated
+    const savedTasks = JSON.parse(localStorage.getItem('tasks'));
+    expect(savedTasks).toBeNull();
+  });
 });
