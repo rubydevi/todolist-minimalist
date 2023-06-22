@@ -1,5 +1,6 @@
-import { addTask, deleteTask } from '../modules/todoList';
 import localStorageMock from '../modules/__mocks__/localStorageMock';
+import { addTask, deleteTask, setTasks, getTasks } from '../modules/todoList';
+
 
 const todoList = document.createElement('ul');
 todoList.id = 'todoList';
@@ -19,69 +20,43 @@ describe('addTask', () => {
   });
 });
 
-// describe('deleteTask', () => {
-//   it('should remove a task from the list', () => {
-//     const tasks = [
-//       {
-//         description: 'Buy groceries',
-//         completed: false,
-//         index: 1,
-//       },
-//       {
-//         description: 'Do laundry',
-//         completed: false,
-//         index: 2,
-//       },
-//     ];
+describe('deleteTask', () => {
+  beforeEach(() => {
+    // Mock the localStorage and clear any stored tasks
+    localStorage.clear();
+    // Mock the tasks data
+    const mockTasks = [
+      { index: 1, description: 'go to gym', completed: false },
+      { index: 2, description: 'join meeting', completed: true },
+      { index: 3, description: 'play video games', completed: false }
+    ];
+    setTasks(mockTasks);
+  });
+  it('should delete a task and update the tasks list', () => {
+    // Call the deleteTask function
+    deleteTask(2);
+    // Assert that the task has been deleted
+    const updatedTasks = getTasks();
+    expect(updatedTasks.length).toBe(2);
+    expect(updatedTasks[0].index).toBe(1);
+    expect(updatedTasks[1].index).toBe(2);
+    // Assert that the tasks have been saved to localStorage
+    const savedTasks = JSON.parse(localStorage.getItem('tasks'));
+    expect(savedTasks).toEqual(updatedTasks);
+    // Additional assertions if needed
+  });
+});
 
-//     const taskToDelete = tasks[0];
-//     const localStorage = localStorageMock;
-//     deleteTask(localStorage, taskToDelete);
 
-//     expect(localStorage.getItem('tasks')).toEqual(JSON.stringify([
-//       {
-//         description: 'Do laundry',
-//         completed: false,
-//         index: 1,
-//       },
-//     ]));
-//   });
-// });
 
-// describe('deleteTask', () => {
-//   it('should remove a task from the list', () => {
-//     const tasks = [
-//       {
-//         description: 'Buy groceries',
-//         completed: false,
-//         index: 1,
-//       },
-//       {
-//         description: 'Do laundry',
-//         completed: false,
-//         index: 2,
-//       },
-//     ];
-  
-//     const taskToDelete = tasks[0];
-//     deleteTask(taskToDelete.index);
-  
-//     // Mock the renderTodoList function
-//     jest.mock('./renderTodoList');
-//     jest.spyOn('./renderTodoList').mockReturnValue({
-//       element: document.createElement('ul'),
-//     });
-  
-//     // Call the renderTodoList function
-//     renderTodoList();
-  
-//     // Assert that the task has been removed from the list
-//     expect(tasks).toEqual([
-//       {
-//         description: 'Do laundry',
-//         completed: false,
-//         index: 1,
-//       },
-//     ]);
-//   });
-// });
+
+
+
+
+
+
+
+
+
+
+
