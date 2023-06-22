@@ -44,6 +44,30 @@ describe('deleteTask', () => {
     // Assert that the tasks have been saved to localStorage
     const savedTasks = JSON.parse(localStorage.getItem('tasks'));
     expect(savedTasks).toEqual(updatedTasks);
-    // Additional assertions if needed
+  });
+});
+
+describe('editTaskDescription', () => {
+  beforeEach(() => {
+    // Mock the localStorage and clear any stored tasks
+    localStorage.clear();
+    // Mock the tasks data
+    const mockTasks = [
+      { index: 1, description: 'go to gym', completed: false },
+      { index: 2, description: 'join meeting', completed: true },
+      { index: 3, description: 'play video games', completed: false },
+    ];
+    setTasks(mockTasks);
+  });
+
+  it('edit the description of a task and update the tasks list', () => {
+    // Call the editTaskDescription function
+    editTaskDescription(2, 'updated description');
+    // Assert that the task description has been updated
+    const updatedTasks = getTasks();
+    expect(updatedTasks[1].description).toBe('updated description');
+    // Assert that the tasks have been saved to localStorage
+    const savedTasks = JSON.parse(localStorage.getItem('tasks'));
+    expect(savedTasks).toEqual(updatedTasks);
   });
 });
