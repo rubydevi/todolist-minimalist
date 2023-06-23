@@ -1,6 +1,6 @@
 import localStorageMock from '../modules/__mocks__/localStorageMock.js';
 import {
-  addTask, deleteTask, setTasks, getTasks,
+  addTask, deleteTask, setTasks, getTasks, editTaskDescription,
 } from '../modules/todoList.js';
 
 const todoList = document.createElement('ul');
@@ -44,6 +44,38 @@ describe('deleteTask', () => {
     // Assert that the tasks have been saved to localStorage
     const savedTasks = JSON.parse(localStorage.getItem('tasks'));
     expect(savedTasks).toEqual(updatedTasks);
-    // Additional assertions if needed
+  });
+});
+
+describe('editTaskDescription', () => {
+  beforeEach(() => {
+    // Mock the localStorage and clear any stored tasks
+    localStorage.clear();
+    // Mock the tasks data
+    const mockTasks = [
+      { index: 1, description: 'go to gym', completed: false },
+      { index: 2, description: 'join meeting', completed: true },
+      { index: 3, description: 'play video games', completed: false },
+    ];
+    setTasks(mockTasks);
+  });
+
+  it('edit the description of a task and update the tasks list', () => {
+    // Call the editTaskDescription function
+    editTaskDescription(2, 'updated description');
+    // Assert that the task description has been updated
+    const updatedTasks = getTasks();
+    expect(updatedTasks[1].description).toBe('updated description');
+    // Assert that the tasks have been saved to localStorage
+    const savedTasks = JSON.parse(localStorage.getItem('tasks'));
+    expect(savedTasks).toEqual(updatedTasks);
+  });
+
+  it('should not edit the description when task index is not found', () => {
+    // Call editTaskDescription() with non-existing task index
+    editTaskDescription(4, 'updated description');
+    // Assert that the tasks and localStorage are not updated
+    const savedTasks = JSON.parse(localStorage.getItem('tasks'));
+    expect(savedTasks).toBeNull();
   });
 });

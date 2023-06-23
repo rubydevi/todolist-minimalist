@@ -1,4 +1,5 @@
 let tasks = [];
+export const tasksCopy = tasks;
 
 export const saveTasksToLocalStorage = () => {
   localStorage.setItem('tasks', JSON.stringify(tasks));
