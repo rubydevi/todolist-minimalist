@@ -1,3 +1,6 @@
+import { TextEncoder, TextDecoder } from 'util';
+Object.assign(global, { TextDecoder, TextEncoder });
+const { JSDOM } = require('jsdom');
 import {
   setTasks,
   getTasks,
@@ -6,6 +9,37 @@ import { clearCompleted } from '../modules/statusUpdates.js';
 import { updateStatus } from '../modules/statusUpdates.js';
 import { tasks } from '../modules/todoList.js';
 
+const { window } = new JSDOM(`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+    <main>
+        <div id="divToDoList" class="bg-white">
+            <div class="list-title">
+                <h2>Today's To Do</h2>
+                <i class="fa-solid fa-rotate"></i>
+            </div>
+            <div class="list-input">
+                <input type="text" placeholder="Add to your list...">
+                <i class="fas fa-level-down-alt fa-rotate-90"></i>
+            </div>
+
+            <div id="todoList">
+               <p>one</p>
+            </div>
+
+            <div class="list-footer">
+                <button>Clear all completed</button>
+            </div>
+        </div>
+    </main>
+</body>
+</html>`);
+
+
+global.document = window.document;
 
 const todoList = document.createElement('ul');
 todoList.id = 'todoList';
@@ -47,6 +81,7 @@ describe("clear Completed", () => {
       { index: 2, description: 'join meeting', completed: true },
       { index: 3, description: 'play video games', completed: true },
       { index: 3, description: 'check new cars', completed: true },
+      { index: 3, description: 'eat chicken legs', completed: false },
     ];
     setTasks(mockTasks);
   });
@@ -54,12 +89,25 @@ describe("clear Completed", () => {
   it("should delete all completed tasks", () => {
     let amountOfCompletedTasks = 0;
     const initialLength = tasks.length;
+    const todoList = document.querySelector("#todoList");
+    
 
     for (let index = 0; index < tasks.length; index++) {
       const element = tasks[index];
       element.completed && amountOfCompletedTasks++;
     }
     clearCompleted();
+
+    
+    //simulate printing tasks 
+    todoList.innerHTML = ``;
+    tasks.forEach((task) => {
+      const taskElement = document.createElement('p');
+      taskElement.innerHTML = `<p>${task.content}</p>`;
+      todoList.appendChild(taskElement);
+    });
+
     expect(initialLength - amountOfCompletedTasks).toBe(tasks.length);
+    expect(todoList.children.length).toBe(tasks.length);
   })
 });
