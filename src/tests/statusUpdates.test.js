@@ -1,16 +1,15 @@
 import { TextEncoder, TextDecoder } from 'util';
-Object.assign(global, { TextDecoder, TextEncoder });
-const { JSDOM } = require('jsdom');
 import {
   setTasks,
   getTasks,
+  tasksCopy as tasks,
 } from '../modules/todoList.js';
-import { clearCompleted } from '../modules/statusUpdates.js';
-import { updateStatus } from '../modules/statusUpdates.js';
-import { tasks } from '../modules/todoList.js';
+import { clearCompleted, updateStatus } from '../modules/statusUpdates.js';
 
+Object.assign(global, { TextDecoder, TextEncoder });
+const { JSDOM } = require('jsdom');
 
-//mock document 
+// mock document
 const { window } = new JSDOM(`
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +39,7 @@ const { window } = new JSDOM(`
 </body>
 </html>`);
 
-//set window globally;
+// set window globally;
 global.document = window.document;
 
 const todoList = document.createElement('ul');
@@ -72,7 +71,7 @@ describe('updateStatus', () => {
   });
 });
 
-describe("clear Completed", () => {
+describe('clear Completed', () => {
   beforeEach(() => {
     // Mock the localStorage and clear any stored tasks
     localStorage.clear();
@@ -88,21 +87,21 @@ describe("clear Completed", () => {
     setTasks(mockTasks);
   });
 
-  it("should delete all completed tasks", () => {
+  it('should delete all completed tasks', () => {
     let amountOfCompletedTasks = 0;
     const initialLength = tasks.length;
-    const todoList = document.querySelector("#todoList");
-    
+    const todoList = document.querySelector('#todoList');
 
     for (let index = 0; index < tasks.length; index++) {
       const element = tasks[index];
-      element.completed && amountOfCompletedTasks++;
+      if (element.completed) {
+        amountOfCompletedTasks += 1;
+      }
     }
     clearCompleted();
 
-    
-    //simulate printing tasks 
-    todoList.innerHTML = ``;
+    // simulate printing tasks
+    todoList.innerHTML = '';
     tasks.forEach((task) => {
       const taskElement = document.createElement('p');
       taskElement.innerHTML = `<p>${task.content}</p>`;
@@ -111,5 +110,5 @@ describe("clear Completed", () => {
 
     expect(initialLength - amountOfCompletedTasks).toBe(tasks.length);
     expect(todoList.children.length).toBe(tasks.length);
-  })
+  });
 });
