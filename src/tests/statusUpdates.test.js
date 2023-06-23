@@ -9,6 +9,8 @@ import { clearCompleted } from '../modules/statusUpdates.js';
 import { updateStatus } from '../modules/statusUpdates.js';
 import { tasks } from '../modules/todoList.js';
 
+
+//mock document 
 const { window } = new JSDOM(`
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +40,7 @@ const { window } = new JSDOM(`
 </body>
 </html>`);
 
-
+//set window globally;
 global.document = window.document;
 
 const todoList = document.createElement('ul');
